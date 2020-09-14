@@ -9,12 +9,11 @@ public class AIAgent : Agent
 
     public float moveSpeed = 5f;
     public float turnSpeed = 180f;
-    //public GameObject DroppedTrashPrefab;
 
-    //private Dictionary<string, string> dict;
-    //private string lastPickedTag;
-    //private GameObject lastPicked;
-    //private GameObject trashbinOfTarget;
+    private Dictionary<string, string> dict;
+    private string lastPickedTag;
+    private GameObject lastPicked;
+    private GameObject trashbinOfTarget;
 
     private TerrainArea terrainArea;
     new private Rigidbody rigidbody;
@@ -31,11 +30,11 @@ public class AIAgent : Agent
         terrainArea = GetComponentInParent<TerrainArea>();
         rigidbody = GetComponent<Rigidbody>();
 
-        //dict = new Dictionary<string, string>();
-        //dict.Add("TrashYellow", "TrashBinYellow");
+        dict = new Dictionary<string, string>();
+        dict.Add("TrashYellow", "TrashBinYellow");
         //dict.Add("TrashRed", "TrashBinRed");
         //dict.Add("TrashGreen", "TrashBinGreen");
-        //dict.Add("TrashBlue", "TrashBinBlue");
+        dict.Add("TrashBlue", "TrashBinBlue");
     }
 
     public override void AgentAction(float[] vectorAction)
@@ -92,25 +91,27 @@ public class AIAgent : Agent
     {
         isDone = false;
         terrainArea.ResetArea();
-        dropRadius = Academy.Instance.FloatProperties.GetPropertyWithDefault("drop_radius", 0f); //Curriculum learning
+        dropRadius = Academy.Instance.FloatProperties.GetPropertyWithDefault("drop_radius", 0f);
     }
 
     public override void CollectObservations()
     {
-        //if(trashbinOfTarget != null)
-        //{
+        if(trashbinOfTarget != null)
+        {
         // Whether the agent has successfully drop trash in the correct trash bin (1 float = 1 value)
         AddVectorObs(isDone);
 
         // Distance to the trash bin (1 float = 1 value)
-        AddVectorObs(Vector3.Distance(GameObject.FindGameObjectWithTag("TrashBinYellow").transform.position, transform.position));
+        //AddVectorObs(Vector3.Distance(GameObject.FindGameObjectWithTag("TrashBinYellow").transform.position, transform.position));
+        AddVectorObs(Vector3.Distance(trashbinOfTarget.transform.position, transform.position));
 
         // Direction to trash bin (1 Vector3 = 3 values)
-        AddVectorObs((GameObject.FindGameObjectWithTag("TrashBinYellow").transform.position - transform.position).normalized);
+        //AddVectorObs((GameObject.FindGameObjectWithTag("TrashBinYellow").transform.position - transform.position).normalized);
+        AddVectorObs((trashbinOfTarget.transform.position - transform.position).normalized);
 
         // Direction agent is facing (1 Vector3 = 3 values)
         AddVectorObs(transform.forward);
-        //}
+        }
 
     }
 
@@ -129,15 +130,13 @@ public class AIAgent : Agent
         }
 
         // Test if the agent is close enough to drop the trash in the trash bin
-        if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("TrashBinYellow").transform.position) < dropRadius)
+        //if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("TrashBinYellow").transform.position) < dropRadius)
+        if (trashbinOfTarget != null && Vector3.Distance(transform.position, trashbinOfTarget.transform.position) < dropRadius)
         {
             DropTrash();
         }
     }
 
-
-
-    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (dict.ContainsKey(collision.transform.tag))
@@ -153,8 +152,9 @@ public class AIAgent : Agent
             DropTrash();
         }
     }
-    */
 
+
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("TrashYellow"))
@@ -166,6 +166,7 @@ public class AIAgent : Agent
             DropTrash();
         }
     }
+    */
 
     private void CollectTrash(GameObject trashObject)
     {
@@ -181,18 +182,6 @@ public class AIAgent : Agent
     {
         if (!isDone) return;
         isDone = false;
-
-        /*
-        GameObject droppedTrash = Instantiate(DroppedTrashPrefab);
-        droppedTrash.transform.parent = transform.parent;
-        droppedTrash.transform.position = agent.transform.position;
-        Destroy(droppedTrash, 4f);
-
-        GameObject recycle = Instantiate<GameObject>(recyclePrefab);
-        recycle.transform.parent = transform.parent;
-        recycle.transform.position = trashBin.transform.position + Vector3.up;
-        Destroy(recycle, 4f);
-        */
 
         AddReward(1f);
 

@@ -7,7 +7,7 @@ public class TerrainArea : MonoBehaviour
 {
     public AIAgent aiAgent;
 
-    //public GameObject TrashbinBlue;
+    public GameObject TrashbinBlue;
     //public GameObject TrashbinRed;
     public GameObject TrashbinYellow;
     //public GameObject TrashbinGreen;
@@ -35,7 +35,7 @@ public class TerrainArea : MonoBehaviour
     public void ResetArea() {
         RemoveAllTrash();
         PlaceAIAgent();
-        SpawnTrash(0,0,4,0); //RED, GREEN, YELLOW, BLUE
+        SpawnTrash(0,0,4,4); //RED, GREEN, YELLOW, BLUE
     }
 
     public void RemoveSpecificTrash(GameObject trashObject) {
@@ -112,13 +112,13 @@ public class TerrainArea : MonoBehaviour
 
     private void PlaceTrashBins()
     {
-    /*
+    
         //Plastic/Blue TrashBin
         GameObject blueTrashBinObject = Instantiate(TrashbinBlue.gameObject);
         blueTrashBinObject.transform.position = ChooseRandomPositionTrashBin();
         blueTrashBinObject.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         blueTrashBinObject.transform.SetParent(transform);
-
+    /*
         //Glass/Green TrashBin
         GameObject greenTrashBinObject = Instantiate(TrashbinGreen.gameObject);
         greenTrashBinObject.transform.position = ChooseRandomPositionTrashBin();
