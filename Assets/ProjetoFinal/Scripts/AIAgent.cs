@@ -33,7 +33,7 @@ public class AIAgent : Agent
         dict = new Dictionary<string, string>();
         dict.Add("TrashYellow", "TrashBinYellow");
         //dict.Add("TrashRed", "TrashBinRed");
-        //dict.Add("TrashGreen", "TrashBinGreen");
+        dict.Add("TrashGreen", "TrashBinGreen");
         dict.Add("TrashBlue", "TrashBinBlue");
     }
 

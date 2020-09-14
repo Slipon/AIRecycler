@@ -914,7 +914,11 @@ MonoBehaviour:
   detectableTags:
   - TrashBinYellow
   - TrashYellow
-  raysPerDirection: 2
+  - TrashBinBlue
+  - TrashBlue
+  - TrashBinGreen
+  - TrashGreen
+  raysPerDirection: 6
   maxRayDegrees: 60
   sphereCastRadius: 0.5
   rayLength: 20
