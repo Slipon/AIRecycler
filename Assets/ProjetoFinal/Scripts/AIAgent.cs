@@ -32,7 +32,7 @@ public class AIAgent : Agent
 
         dict = new Dictionary<string, string>();
         dict.Add("TrashYellow", "TrashBinYellow");
-        //dict.Add("TrashRed", "TrashBinRed");
+        dict.Add("TrashRed", "TrashBinRed");
         dict.Add("TrashGreen", "TrashBinGreen");
         dict.Add("TrashBlue", "TrashBinBlue");
     }
@@ -52,9 +52,11 @@ public class AIAgent : Agent
         }
 
         rigidbody.MovePosition(transform.position + transform.forward * forwardAmount * moveSpeed * Time.fixedDeltaTime);
+        //animator.SetBool("running", true);
         transform.Rotate(transform.up * turnAmount * turnSpeed * Time.fixedDeltaTime);
 
-        if (maxStep > 0) AddReward(-1f / maxStep);
+        if (maxStep > 0) 
+            AddReward(-1f / maxStep);
     }
 
     public override float[] Heuristic() // Used only for keyboard input and test

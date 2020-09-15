@@ -918,7 +918,9 @@ MonoBehaviour:
   - TrashBlue
   - TrashBinGreen
   - TrashGreen
-  raysPerDirection: 6
+  - TrashBinRed
+  - TrashRed
+  raysPerDirection: 8
   maxRayDegrees: 60
   sphereCastRadius: 0.5
   rayLength: 20
@@ -1311,6 +1313,11 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4561261001126040232, guid: 6d2008d1f563c554a9063f9f915becca,
+        type: 3}
+      propertyPath: maxStep
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 4630771012422323968, guid: 6d2008d1f563c554a9063f9f915becca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1470,7 +1477,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 213f19aa9935be14cae7d2fec9f65d91,
+      objectReference: {fileID: 5022602860645237092, guid: b7433ae3fc8a99d4dbca422865d74476,
         type: 3}
     - target: {fileID: 6720073578618851531, guid: 6d2008d1f563c554a9063f9f915becca,
         type: 3}
